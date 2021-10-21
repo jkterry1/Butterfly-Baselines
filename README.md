@@ -1,1 +1,1 @@
-# Butterfly-Demos
+This repo includes baseline learning code for all the PettingZoo Butterfly environments (except Prison, which is a toy debugging environment) based on parameter shared PPO via [Stable Baslines 3](https://github.com/DLR-RM/stable-baselines3) and [SuperSuit](https://github.com/Farama-Foundation/SuperSuit). 
