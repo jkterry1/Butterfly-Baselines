@@ -40,8 +40,8 @@ parser.add_argument(
 parser.add_argument("--n-runs", type=int, default=5)
 parser.add_argument("--n-evaluations", type=int, default=100)
 parser.add_argument("--timesteps", type=int, default=0)
-parser.add_argument("--num-cpus", type=int, default=8)
-parser.add_argument("--num-vec-envs", type=int, default=4)
+parser.add_argument("--num-cpus", type=int, default=12)
+parser.add_argument("--num-vec-envs", type=int, default=3)
 args = parser.parse_args()
 
 param_file = "./config/" + str(args.env_name) + ".json"
@@ -148,7 +148,7 @@ for i in range(args.n_runs):
         # We do not seed the trial
         seed=None,
         verbose=3,
-        **params,
+        **params
     )
 
     run_log_dir = log_dir + "run_" + str(i)
