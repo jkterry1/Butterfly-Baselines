@@ -1,0 +1,15 @@
+{
+    "net_arch": "medium",
+    "activation_fn": "tanh",
+    "agent_indicator": "invert",
+    "batch_size": 64,
+    "n_steps": 64,
+    "gamma": 0.99,
+    "learning_rate": 0.000129491,
+    "ent_coef": 5.32805e-07,
+    "clip_range": 0.4,
+    "n_epochs": 5,
+    "gae_lambda": 0.8,
+    "max_grad_norm": 0.5,
+    "vf_coef": 0.337744
+}

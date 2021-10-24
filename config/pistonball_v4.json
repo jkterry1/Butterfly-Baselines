@@ -1,0 +1,15 @@
+{
+    "net_arch": "small",
+    "activation_fn": "relu",
+    "agent_indicator": "identity",
+    "batch_size": 256,
+    "n_steps": 256,
+    "gamma": 0.98,
+    "learning_rate": 0.000597417,
+    "n_epochs": 10,
+    "clip_range": 0.1,
+    "gae_lambda": 0.8,
+    "max_grad_norm": 0.9,
+    "vf_coef": 0.967044,
+    "ent_coef": 0.0993558
+}
