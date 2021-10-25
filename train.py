@@ -2,7 +2,7 @@ import argparse
 import json
 import os
 import sys
-import logging
+from copy import deepcopy
 
 import supersuit as ss
 from pettingzoo.butterfly import (
@@ -40,8 +40,9 @@ parser.add_argument(
 parser.add_argument("--n-runs", type=int, default=5)
 parser.add_argument("--n-evaluations", type=int, default=100)
 parser.add_argument("--timesteps", type=int, default=0)
-parser.add_argument("--num-cpus", type=int, default=12)
-parser.add_argument("--num-vec-envs", type=int, default=3)
+parser.add_argument("--num-cpus", type=int, default=8)
+parser.add_argument("--num-eval-cpus", type=int, default=4)
+parser.add_argument("--num-vec-envs", type=int, default=4)
 args = parser.parse_args()
 
 param_file = "./config/" + str(args.env_name) + ".json"
@@ -126,6 +127,7 @@ if agent_indicator_name != "identity":
     )
 
 env = ss.pettingzoo_env_to_vec_env_v0(env)
+eval_env = deepcopy(env)
 env = ss.concat_vec_envs_v0(
     env,
     num_vec_envs=args.num_vec_envs,
@@ -135,7 +137,14 @@ env = ss.concat_vec_envs_v0(
 env = VecMonitor(env)
 env = image_transpose(env)
 
-eval_freq = timesteps // evaluations
+eval_env = ss.concat_vec_envs_v0(
+    eval_env,
+    num_vec_envs=args.num_vec_envs,
+    num_cpus=args.num_eval_cpus,
+    base_class="stable_baselines3",
+)
+eval_env = VecMonitor(eval_env)
+eval_env = image_transpose(eval_env)
 
 all_mean_rewards = []
 log_dir = "./data/" + args.env_name + "/"
@@ -153,14 +162,15 @@ for i in range(args.n_runs):
 
     run_log_dir = log_dir + "run_" + str(i)
 
-    n_eval_episodes = 5 * num_agents
+    n_eval_episodes = 5
+    eval_freq = timesteps // evaluations // model.get_env().num_envs
 
     eval_callback = EvalCallback(
-        env,
+        eval_env,
         n_eval_episodes=n_eval_episodes,
         log_path=run_log_dir,
         eval_freq=eval_freq,
         deterministic=True,
-        render=False,
+        render=False
     )
     model.learn(total_timesteps=timesteps, callback=eval_callback)

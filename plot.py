@@ -65,13 +65,6 @@ plt.rcParams.update(
     }
 )
 
-title_map = {
-    "kaz_1_1e7_0": "knights_archers_zombies_v7",
-    "prospector_1_1e8_0": "prospector_v4",
-    "cooperative_pong_1_4e6_0": "cooperative_pong_v3",
-    "pistonball": "pistonball_v4",
-}
-
 fig, ax = plt.subplots()
 clrs = sns.color_palette()
 with sns.axes_style("darkgrid"):
@@ -107,18 +100,18 @@ with sns.axes_style("darkgrid"):
     )
     ax.set_xlabel("Steps", labelpad=1)
     ax.set_ylabel("Average Total Reward", labelpad=1)
-    ax.set_title(title_map[args.env_name])
+    ax.set_title(args.env_name)
     ax.margins(x=0)
     plt.tight_layout(pad=1.00)
 
     # plt.show()
     plt.savefig(
-        "./figures/PPO_" + title_map[args.env_name] + ".pgf",
+        "./figures/PPO_" + args.env_name + ".pgf",
         bbox_inches="tight",
         pad_inches=0.025,
     )
     plt.savefig(
-        "./figures/PPO_" + title_map[args.env_name] + ".png",
+        "./figures/PPO_" + args.env_name + ".png",
         bbox_inches="tight",
         pad_inches=0.025,
         dpi=600,
