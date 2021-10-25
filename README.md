@@ -16,6 +16,6 @@ To plot learning and evaluations in an environment from the data folder:
 
 ```python plot.py --env-name=pistonball_v4 --n-runs=10```
 
-To plot all environments:
+To plot learning curves for all four environments:
 
 ```sh plot_all.sh```
