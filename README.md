@@ -14,7 +14,7 @@ To modify other hyperparameters e.g. learning rate, activation function, network
 
 To plot learning and evaluations in an environment from the data folder:
 
-```python plot.py ==env-name=pistonball_v4 --n-runs=10```
+```python plot.py --env-name=pistonball_v4 --n-runs=10```
 
 To plot all environments:
 
