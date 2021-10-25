@@ -4,13 +4,15 @@ To train all four Butterfly environments for five runs each:
 
 ```sh train_all.sh```
 
+The specifically included environments/verisons are pistonball_v4, knights_archers_zombies_v7, prospector_v4 and cooperative_pong_v3.
+
 To train individual environments:
 
 ```python train.py --env-name=pistonball_v4 --n-runs=5 --n-evaluations=100 --timesteps=2000000  --num-cpus=8 --num-eval-cpus=4 --num-vec-envs=4```
 
 The above example trains pistonball_v4 for 5 runs, with 2000000 timesteps and 100 evaluations per run, on 8 cpus, with four more cpus for the evaluations, and four parallel environments per cpu, and saves the results of the evaluations to data/ENV_NAME/run_x.
 
-To modify other hyperparameters e.g. learning rate, activation function, network size: modify config/ENV_NAME.json
+To modify other hyperparameters e.g. learning rate, activation function, network size: modify config/ENV_NAME.json Note that the current ones are the result of a hyperparameter tuning search with Optuna via RL Baselines3 Zoo. 
 
 To plot learning and evaluations in an environment from the data folder:
 
